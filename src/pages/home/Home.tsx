@@ -20,7 +20,7 @@ export default function Home() {
       const data = await response.json();
       setCompanyList(data);
     } catch (error) {
-      alert(`Error: ${error}`);
+      console.log(`Error: ${error}`);
     }
   };
 
