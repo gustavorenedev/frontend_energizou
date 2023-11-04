@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Footer from "../../components/footer/Footer";
-import Header from "../../components/header/Header";
 import Table from "../../components/table/Table";
+import { Button } from "../../components/button/Button";
+import Layout from "../../components/layout/Layout";
 
 export default function Home() {
   const [companyList, setCompanyList] = useState([]);
@@ -22,12 +22,13 @@ export default function Home() {
 
   return (
     <div>
-      <Header />
-      <section className="contentContainer">
-        <h2>Tabela de empresas</h2>
-        <Table list={companyList} />
-      </section>
-      <Footer />
+      <Layout>
+        <section className="contentContainer">
+          <h2>Tabela de empresas</h2>
+          <Button onClick={() => {}}>Adicionar uma empresa</Button>
+          <Table list={companyList} />
+        </section>
+      </Layout>
     </div>
   );
 }
