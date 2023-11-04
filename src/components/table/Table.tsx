@@ -8,6 +8,11 @@ type Props = {
 
 const Table = (props: Props) => {
   const { list } = props;
+
+  if (list.length === 0) {
+    return <div>Você não possui uma empresa ainda. Deseja criar uma?</div>;
+  }
+
   return (
     <div className="table-container">
       <table className="custom-table">
@@ -17,7 +22,7 @@ const Table = (props: Props) => {
             <th>Cliente</th>
             <th>Razão</th>
             <th>CNPJ</th>
-            <th>Actions</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -29,9 +34,9 @@ const Table = (props: Props) => {
               <td>{company.company_cnpj}</td>
               <td>
                 <div className="button-container">
-                  <Button onClick={() => console.log("View")}>View</Button>
-                  <Button onClick={() => console.log("Edit")}>Edit</Button>
-                  <Button onClick={() => console.log("Delete")}>Delete</Button>
+                  <Button onClick={() => console.log("View")}>Ver</Button>
+                  <Button onClick={() => console.log("Edit")}>Editar</Button>
+                  <Button onClick={() => console.log("Delete")}>Deletar</Button>
                 </div>
               </td>
             </tr>
