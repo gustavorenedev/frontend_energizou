@@ -38,6 +38,8 @@ const AddCompany = () => {
 
   const [cnpjError, setCnpjError] = useState<string | null>(null);
 
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
   const handleBack = () => {
     navigate(routes.home);
   };
@@ -60,30 +62,40 @@ const AddCompany = () => {
     setFormErrors(errors);
 
     if (Object.values(errors).every((error) => error === null)) {
-
       const cnpjExists = await checkExistingCnpj(formData.company_cnpj);
 
       if (cnpjExists) {
         setCnpjError("CNPJ já existe, por favor, escolha outro.");
       } else {
-
-        fetch("http://localhost:3000/companies", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => {
-            if (response.ok) {
-              console.log("Solicitação POST bem-sucedida");
-            } else {
-              console.error("Erro na solicitação POST");
-            }
-          })
-          .catch((error) => {
-            console.error("Erro na solicitação POST", error);
+        try {
+          const response = await fetch("http://localhost:3000/companies", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
           });
+
+          if (response.ok) {
+            setSuccessMessage("Empresa cadastrada com sucesso.");
+            setFormData({
+              // Limpe os campos após o sucesso
+              client_name: "",
+              client_password: "",
+              company_name: "",
+              company_cnpj: "",
+              company_zip_code: "",
+              company_address: "",
+              company_number: "",
+              company_phone: "",
+              company_email: "",
+            });
+          } else {
+            console.error("Erro na solicitação POST");
+          }
+        } catch (error) {
+          console.error("Erro na solicitação POST", error);
+        }
       }
     }
   };
@@ -103,6 +115,7 @@ const AddCompany = () => {
         <ErrorMessage error={formErrors.company_phone} />
         <ErrorMessage error={formErrors.company_email} />
         <ErrorMessage error={cnpjError} />
+        {successMessage && <p>{successMessage}</p>}
         <div className="boxButtons">
           <Button onClick={handleBack}>Voltar</Button>
           <Button onClick={handleSubmit}>Criar Empresa</Button>
