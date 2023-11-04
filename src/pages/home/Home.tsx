@@ -24,6 +24,18 @@ export default function Home() {
     }
   };
 
+  const handleDeleteCompany = async (companyId: number) => {
+    try {
+      await fetch(`http://localhost:3000/companies/${companyId}`, {
+        method: "DELETE",
+      });
+
+      getCompanies();
+    } catch (error) {
+      console.log(`Error deleting company: ${error}`);
+    }
+  };
+
   useEffect(() => {
     getCompanies();
   }, []);
@@ -36,7 +48,7 @@ export default function Home() {
           <Button onClick={handleAddCompany}>Adicionar uma empresa</Button>
         </div>
 
-        <Table list={companyList} />
+        <Table list={companyList} onDeleteCompany={handleDeleteCompany} />
       </section>
     </Layout>
   );
