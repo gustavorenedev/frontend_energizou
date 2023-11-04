@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Table from "../../components/table/Table";
 import { Button } from "../../components/button/Button";
 import Layout from "../../components/layout/Layout";
+import "./Home.style.less";
 
 export default function Home() {
   const [companyList, setCompanyList] = useState([]);
@@ -24,8 +25,11 @@ export default function Home() {
     <div>
       <Layout>
         <section className="contentContainer">
-          <h2>Tabela de empresas</h2>
-          <Button onClick={() => {}}>Adicionar uma empresa</Button>
+          <div className="contentMain">
+            <h2>Tabela de empresas</h2>
+            <Button onClick={() => {}}>Adicionar uma empresa</Button>
+          </div>
+
           <Table list={companyList} />
         </section>
       </Layout>
