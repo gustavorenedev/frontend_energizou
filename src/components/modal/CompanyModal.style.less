@@ -1,0 +1,33 @@
+@import "../../styles/Sizes.less";
+@import "../../styles/Colors.less";
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: @primaryText;
+  padding: @main;
+  border-radius: @xxsmall;
+  box-shadow: 0 0 @xsmall rgba(0, 0, 0, 0.3);
+}
+
+.modal-itens {
+  display: flex;
+  flex-direction: column;
+  gap: @xsmall;
+  padding-bottom: @xsmall;
+}
+
+.modal button {
+  margin-top: 10px;
+}
