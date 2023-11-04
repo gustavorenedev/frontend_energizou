@@ -1,34 +1,56 @@
+@import "../../styles/Sizes.less";
+@import "../../styles/Colors.less";
+
 .table-container {
-  max-width: 100%;
-  overflow-x: auto;
+  max-height: 360px;
+  overflow-y: auto;
+}
 
-  .custom-table {
-    width: 100%;
-    border-collapse: collapse;
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
 
-    thead {
-      background-color: #333;
-      color: #fff;
-      font-weight: bold;
+  thead {
+    background-color: @secondColor;
+    color: @primaryText;
+    font-weight: bold;
 
-      th {
-        padding: 10px;
-        text-align: left;
-      }
+    th {
+      padding: @xsmall;
+      text-align: center;
+      vertical-align: middle;
     }
+  }
 
-    tbody {
-      tr {
-        td {
-          padding: 10px;
-          border-bottom: 1px solid #ddd;
+  tbody {
+    tr {
+      td {
+        padding: @xsmall;
+        border-bottom: 1px solid @button;
 
-          .button-container {
-            display: flex;
-            gap: 10px;
-          }
+        .button-container {
+          display: flex;
+          gap: @xsmall;
         }
       }
     }
   }
+}
+
+.table-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: @xxsmall;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  border-radius: @xxsmall;
 }
