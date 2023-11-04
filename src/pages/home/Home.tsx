@@ -3,9 +3,16 @@ import Table from "../../components/table/Table";
 import { Button } from "../../components/button/Button";
 import Layout from "../../components/layout/Layout";
 import "./Home.style.less";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [companyList, setCompanyList] = useState([]);
+
+  const handleAddCompany = () => {
+    navigate(routes.add_company);
+  };
 
   const getCompanies = async () => {
     try {
@@ -22,17 +29,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <Layout>
-        <section className="contentContainer">
-          <div className="contentMain">
-            <h2>Tabela de empresas</h2>
-            <Button onClick={() => {}}>Adicionar uma empresa</Button>
-          </div>
+    <Layout>
+      <section className="contentContainer">
+        <div className="contentMain">
+          <h2>Tabela de empresas</h2>
+          <Button onClick={handleAddCompany}>Adicionar uma empresa</Button>
+        </div>
 
-          <Table list={companyList} />
-        </section>
-      </Layout>
-    </div>
+        <Table list={companyList} />
+      </section>
+    </Layout>
   );
 }
