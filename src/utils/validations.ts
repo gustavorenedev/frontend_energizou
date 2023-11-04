@@ -45,7 +45,7 @@ export const isValidAddress = (address: string): string | null => {
 export const isValidNumber = (number: string): string | null => {
   const numberPattern = /^[1-9][0-9]{0,3}$/;
   if (!numberPattern.test(number)) {
-    return "Número inválido. Deve ser um número inteiro válido.";
+    return "Número inválido. Deve ser um número inteiro válido e até 10.";
   }
   return null;
 };
@@ -61,12 +61,11 @@ export const isValidPhone = (phone: string): string | null => {
 export const isValidEmail = (email: string): string | null => {
   const emailPattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
   if (!emailPattern.test(email)) {
-    return "Email inválido. Deve ser um endereço de email válido.";
+    return "Email inválido. Deve seguir o formato xxxxxx@xxxx.com.";
   }
   return null;
 };
 
 export const cleanCnpj = (cnpj: string): string => {
-  // Remove todos os caracteres não numéricos do CNPJ
   return cnpj.replace(/[^0-9]/g, "");
 };
