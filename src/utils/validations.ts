@@ -1,4 +1,3 @@
-// utils.ts
 export const isValidClientName = (name: string): string | null => {
   if (name.trim() === "") {
     return "Nome do Cliente é obrigatório.";
@@ -52,7 +51,7 @@ export const isValidNumber = (number: string): string | null => {
 };
 
 export const isValidPhone = (phone: string): string | null => {
-  const phonePattern = /^\+55 \([0-9]{2}\) [0-9]{5}-[0-9]{4}$/;
+  const phonePattern = /^\+55\([0-9]{2}\)[0-9]{5}-[0-9]{4}$/;
   if (!phonePattern.test(phone)) {
     return "Telefone inválido. Deve seguir o formato +55(XX)XXXXX-XXXX";
   }
@@ -65,4 +64,9 @@ export const isValidEmail = (email: string): string | null => {
     return "Email inválido. Deve ser um endereço de email válido.";
   }
   return null;
+};
+
+export const cleanCnpj = (cnpj: string): string => {
+  // Remove todos os caracteres não numéricos do CNPJ
+  return cnpj.replace(/[^0-9]/g, "");
 };
