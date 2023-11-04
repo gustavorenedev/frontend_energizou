@@ -26,6 +26,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="text"
         name="client_name"
         value={formData.client_name}
+        placeholder=""
         onChange={onChange}
       />
       <Input
@@ -33,6 +34,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="password"
         name="client_password"
         value={formData.client_password}
+        placeholder=""
         onChange={onChange}
       />
       <Input
@@ -40,6 +42,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="text"
         name="company_name"
         value={formData.company_name}
+        placeholder=""
         onChange={onChange}
       />
       <Input
@@ -47,6 +50,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="text"
         name="company_cnpj"
         value={formData.company_cnpj}
+        placeholder="XX.XXX.XXX/XXXX-XX"
         onChange={onChange}
       />
       <Input
@@ -54,6 +58,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="text"
         name="company_zip_code"
         value={formData.company_zip_code}
+        placeholder="XXXXX-XXX"
         onChange={onChange}
       />
       <Input
@@ -61,6 +66,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="text"
         name="company_address"
         value={formData.company_address}
+        placeholder=""
         onChange={onChange}
       />
       <Input
@@ -68,6 +74,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="text"
         name="company_number"
         value={formData.company_number}
+        placeholder=""
         onChange={onChange}
       />
       <Input
@@ -75,6 +82,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="text"
         name="company_phone"
         value={formData.company_phone}
+        placeholder="+XX(XX)XXXXX-XXXX"
         onChange={onChange}
       />
       <Input
@@ -82,6 +90,7 @@ const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
         type="email"
         name="company_email"
         value={formData.company_email}
+        placeholder="xxxxxx@xxxx.com"
         onChange={onChange}
       />
     </form>
