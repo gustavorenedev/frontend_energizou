@@ -6,8 +6,12 @@ import { routes } from "./routes";
 function App() {
   return (
     <BrowserRouter>
+      {/* Configuração das rotas da aplicação */}
       <Routes>
+        {/* Rota para a página inicial (home) */}
         <Route path={routes.home} element={<Home />} />
+
+        {/* Rota para a página de adicionar uma empresa */}
         <Route path={routes.add_company} element={<AddCompany />} />
       </Routes>
     </BrowserRouter>

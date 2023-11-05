@@ -7,14 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
 import { getCompanies, deleteCompany } from "../../api/service/fetchApis";
 
+// Componente que representa a página inicial, exibindo a lista de empresas
 export default function Home() {
   const navigate = useNavigate();
   const [companyList, setCompanyList] = useState([]);
 
+  // Navega para a página de adição de empresa
   const handleAddCompany = () => {
     navigate(routes.add_company);
   };
 
+  // Remove uma empresa da lista pelo seu ID
   const handleDeleteCompany = async (companyId) => {
     try {
       await deleteCompany(companyId);
@@ -24,6 +27,7 @@ export default function Home() {
     }
   };
 
+  // Obtém a lista de empresas da API
   const getCompanyList = async () => {
     try {
       const data = await getCompanies();
@@ -33,6 +37,7 @@ export default function Home() {
     }
   };
 
+  // Atualiza a lista de empresas sempre que companyList muda
   useEffect(() => {
     getCompanyList();
   }, [companyList]);

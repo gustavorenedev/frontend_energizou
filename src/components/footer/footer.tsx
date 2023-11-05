@@ -1,7 +1,9 @@
+import React from "react";
 import logoLinkedin from "../../assets/linkedinIcon.png";
 import logoGithub from "../../assets/githubIcon.png";
 import "./Footer.style.less";
 
+// Componente do rodapé
 const Footer = () => {
   return (
     <div className="elementFooter">

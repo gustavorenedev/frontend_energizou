@@ -1,5 +1,6 @@
+// Componente de exibição de mensagens de erro
 type ErrorMessageProps = {
-  error: string | null;
+  error: string | null; // Mensagem de erro (pode ser nula)
 };
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ error }) => {

@@ -9,9 +9,11 @@ import { routes } from "../../routes";
 import "./AddCompany.style.less";
 import { createCompany, checkExistingCnpj } from "../../api/service/fetchApis";
 
+// Componente para adicionar uma nova empresa
 const AddCompany = () => {
   const navigate = useNavigate();
 
+  // Dados iniciais do formulário
   const initialFormData = {
     client_name: "",
     client_password: "",
@@ -24,14 +26,15 @@ const AddCompany = () => {
     company_email: "",
   };
 
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState(initialFormData); // Estado para os dados do formulário
   const [formErrors, setFormErrors] = useState({
     ...initialFormData,
-  });
-  const [cnpjError, setCnpjError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  }); // Estado para erros do formulário
+  const [cnpjError, setCnpjError] = useState<string | null>(null); // Estado para erros relacionados ao CNPJ
+  const [successMessage, setSuccessMessage] = useState<string | null>(null); // Estado para mensagens de sucesso
 
   const handleBack = () => {
+    // Redireciona de volta para a página inicial
     navigate(routes.home);
   };
 
@@ -39,6 +42,7 @@ const AddCompany = () => {
     const { name, value } = e.target;
 
     if (name === "company_cnpj") {
+      // Limpa os erros relacionados ao CNPJ quando o campo é alterado
       setCnpjError(null);
     }
 
@@ -58,6 +62,7 @@ const AddCompany = () => {
         const cnpjExists = await checkExistingCnpj(formData.company_cnpj);
 
         if (cnpjExists) {
+          // Define um erro se o CNPJ já existir
           setCnpjError("CNPJ já existe, por favor, escolha outro.");
         } else {
           const successMessage = await createCompany(formData);
@@ -70,6 +75,7 @@ const AddCompany = () => {
   };
 
   const renderErrorMessages = () => {
+    // Renderiza mensagens de erro para campos específicos
     const errorFields = [
       "client_name",
       "client_password",

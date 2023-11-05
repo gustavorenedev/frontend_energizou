@@ -2,15 +2,16 @@ import { Button } from "../button/Button";
 import { ICompany } from "../companyPreview/companyPreview";
 import "./CompanyModal.style.less";
 
+// Propriedades para o componente modal
 type ModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  company: ICompany;
+  isOpen: boolean; // Define se o modal está aberto ou fechado
+  onClose: () => void; // Função para fechar o modal
+  company: ICompany; // Dados da empresa a ser exibida
 };
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, company }) => {
   if (!isOpen) {
-    return null;
+    return null; // Não renderizar nada se o modal estiver fechado
   }
 
   return (

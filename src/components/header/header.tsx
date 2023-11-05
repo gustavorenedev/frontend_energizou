@@ -1,6 +1,7 @@
 import logo from "../../assets/energizouLogo.png";
 import "./Header.style.less";
 
+// Componente de cabeçalho da página
 const Header = () => {
   return (
     <div className="elementHeader">

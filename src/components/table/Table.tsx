@@ -1,4 +1,3 @@
-// Table.tsx
 import React, { useState } from "react";
 import { Button } from "../button/Button";
 import Modal from "../modal/CompanyModal";
@@ -7,35 +6,44 @@ import { ICompany } from "../companyPreview/companyPreview";
 import "./Table.style.less";
 import Input from "../input/Input";
 
+// Props para o componente Table
 type Props = {
-  list: ICompany[];
-  onDeleteCompany: (companyId: number) => void;
+  list: ICompany[]; // Lista de empresas a ser exibida na tabela
+  onDeleteCompany: (companyId: number) => void; // Função para excluir uma empresa
 };
 
+// Componente de tabela que exibe a lista de empresas
 const Table: React.FC<Props> = ({ list, onDeleteCompany }) => {
+  // Estados para controlar a empresa selecionada, a abertura do modal de visualização e a abertura do modal de edição
   const [selectedCompany, setSelectedCompany] = useState<ICompany | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [cnpjFilter, setCnpjFilter] = useState<string>("");
+  const [cnpjFilter, setCnpjFilter] = useState<string>(""); // Estado para filtrar a lista de empresas
 
-  const handleUpdateCompany = () => {};
+  const handleUpdateCompany = () => {
+    // Implemente a lógica para atualizar uma empresa aqui
+  };
 
   const handleEdit = (company: ICompany) => {
+    // Abre o modal de edição com os detalhes da empresa selecionada
     setSelectedCompany(company);
     setIsUpdateModalOpen(true);
   };
 
   const handleDeleteClick = (companyId: number) => {
     if (window.confirm("Tem certeza de que deseja excluir esta empresa?")) {
+      // Chama a função de exclusão da empresa
       onDeleteCompany(companyId);
     }
   };
 
   const handleViewClick = (company: ICompany) => {
+    // Abre o modal de visualização com os detalhes da empresa selecionada
     setSelectedCompany(company);
     setIsModalOpen(true);
   };
 
+  // Filtra a lista de empresas com base no CNPJ inserido
   const filteredCompanies = list.filter((company) =>
     company.company_cnpj.includes(cnpjFilter)
   );

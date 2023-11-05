@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../input/Input";
 
+// Definição da estrutura dos dados do formulário
 type FormData = {
   client_name: string;
   client_password: string;
@@ -13,11 +14,13 @@ type FormData = {
   company_email: string;
 };
 
+// Props para o componente CompanyForm
 type Props = {
   formData: FormData;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
+// Componente de formulário para informações da empresa
 const CompanyForm: React.FC<Props> = ({ formData, onChange }) => {
   return (
     <form>
