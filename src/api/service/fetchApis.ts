@@ -55,7 +55,7 @@ export async function updateCompany(company: any) {
   }
 }
 
-export async function createCompany(formData) {
+export async function createCompany(formData: any): Promise<string> {
   try {
     const response = await fetch("http://localhost:3000/companies", {
       method: "POST",
