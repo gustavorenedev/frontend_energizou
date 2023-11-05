@@ -3,7 +3,7 @@ import { Button } from "../button/Button";
 import { ICompany } from "../companyPreview/companyPreview";
 import "./modalUpdate.style.less";
 import CompanyForm from "../form/Form";
-import { updateCompany } from "../../api/service/fetchApis";
+import { checkExistingCnpj, updateCompany } from "../../api/service/fetchApis";
 import { validateForm } from "../../utils/validationsErrors";
 import ErrorMessage from "../errorMessage/errorMessage";
 
@@ -36,8 +36,12 @@ const EditCompanyModal: React.FC<EditCompanyModalProps> = ({
   });
   const [editedCompany, setEditedCompany] = useState({ ...company });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [companyCnpj, setCompanyCnpj] = useState<string>("");
+  const [companyId, setCompanyId] = useState<number>(0);
 
   const handleEdit = async () => {
+    setCompanyCnpj(company.company_cnpj);
+    setCompanyId(company.id);
     const errors = validateForm(editedCompany);
 
     if (Object.values(errors).some((error) => error !== null)) {
@@ -46,12 +50,11 @@ const EditCompanyModal: React.FC<EditCompanyModalProps> = ({
       return;
     }
 
-    // Caso não haja erros, prossiga com a edição
     try {
-      const updatedData = await updateCompany(editedCompany); // Chama o serviço de API para atualizar a empresa
+      const updatedData = await updateCompany(editedCompany);
 
-      onUpdateCompany(updatedData); // Atualize a empresa na lista local com os dados atualizados da API
-      setSuccessMessage("Empresa atualizada com sucesso."); // Defina a mensagem de sucesso
+      onUpdateCompany(updatedData);
+      setSuccessMessage("Empresa atualizada com sucesso.");
       setTimeout(() => {
         onClose();
       }, 1000);
@@ -80,6 +83,25 @@ const EditCompanyModal: React.FC<EditCompanyModalProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    if (name === "company_cnpj" && companyId !== 1) {
+      if (value !== companyCnpj) {
+        checkExistingCnpj(value).then((cnpjExists) => {
+          if (cnpjExists) {
+            setFormErrors({
+              ...formErrors,
+              [name]: "CNPJ já existe, por favor, escolha outro.",
+            });
+          } else {
+            setFormErrors({
+              ...formErrors,
+              [name]: null,
+            });
+          }
+        });
+      }
+    }
+
     setEditedCompany({
       ...editedCompany,
       [name]: value,
