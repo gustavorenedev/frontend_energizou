@@ -5,6 +5,7 @@ import Modal from "../modal/CompanyModal";
 import EditCompanyModal from "../../components/modalUpdate/modalUpdate"; // Importe o modal de edição
 import { ICompany } from "../companyPreview/companyPreview";
 import "./Table.style.less";
+import Input from "../input/Input";
 
 type Props = {
   list: ICompany[];
@@ -15,6 +16,7 @@ const Table: React.FC<Props> = ({ list, onDeleteCompany }) => {
   const [selectedCompany, setSelectedCompany] = useState<ICompany | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [cnpjFilter, setCnpjFilter] = useState<string>("");
 
   const handleUpdateCompany = () => {};
 
@@ -34,14 +36,26 @@ const Table: React.FC<Props> = ({ list, onDeleteCompany }) => {
     setIsModalOpen(true);
   };
 
+  const filteredCompanies = list.filter((company) =>
+    company.company_cnpj.includes(cnpjFilter)
+  );
+
   return (
     <div className="table-container">
-      {list.length === 0 ? (
+      <Input
+        label="Busque a empresa pelo CNPJ"
+        type="text"
+        name="cpnj"
+        placeholder="Insira o CNPJ"
+        value={cnpjFilter}
+        onChange={(e) => setCnpjFilter(e.target.value)}
+      />
+      {filteredCompanies.length === 0 ? (
         <div>Não há nenhuma empresa. Clique em adicionar uma empresa</div>
       ) : (
         <table className="custom-table">
           <tbody>
-            {list.map((company) => (
+            {filteredCompanies.map((company) => (
               <tr key={company.id}>
                 <td>{company.id}</td>
                 <td>{company.client_name}</td>

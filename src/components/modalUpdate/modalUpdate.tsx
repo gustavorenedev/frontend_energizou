@@ -117,8 +117,10 @@ const EditCompanyModal: React.FC<EditCompanyModalProps> = ({
         {successMessage && (
           <div className="success-message">{successMessage}</div>
         )}
-        <Button onClick={handleEdit}>Salvar</Button>
-        <Button onClick={onClose}>Cancelar</Button>
+        <div className="boxButtons">
+          <Button onClick={handleEdit}>Salvar</Button>
+          <Button onClick={onClose}>Cancelar</Button>
+        </div>
       </div>
     </div>
   );
