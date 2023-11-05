@@ -5,6 +5,7 @@ import Layout from "../../components/layout/Layout";
 import "./Home.style.less";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
+import { getCompanies, deleteCompany } from "../../api/service/fetchApis";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -14,31 +15,27 @@ export default function Home() {
     navigate(routes.add_company);
   };
 
-  const getCompanies = async () => {
+  const handleDeleteCompany = async (companyId) => {
     try {
-      const response = await fetch("http://localhost:3000/companies");
-      const data = await response.json();
+      await deleteCompany(companyId);
+      getCompanyList();
+    } catch (error) {
+      console.log(`Error deleting company: ${error}`);
+    }
+  };
+
+  const getCompanyList = async () => {
+    try {
+      const data = await getCompanies();
       setCompanyList(data);
     } catch (error) {
       console.log(`Error: ${error}`);
     }
   };
 
-  const handleDeleteCompany = async (companyId: number) => {
-    try {
-      await fetch(`http://localhost:3000/companies/${companyId}`, {
-        method: "DELETE",
-      });
-
-      getCompanies();
-    } catch (error) {
-      console.log(`Error deleting company: ${error}`);
-    }
-  };
-
   useEffect(() => {
-    getCompanies();
-  }, []);
+    getCompanyList();
+  }, [companyList]);
 
   return (
     <Layout>
