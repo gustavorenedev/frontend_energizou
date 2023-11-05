@@ -1,8 +1,10 @@
 import { cleanCnpj } from "../../utils/validations";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function getCompanies() {
   try {
-    const response = await fetch("http://localhost:3000/companies");
+    const response = await fetch(`${apiUrl}/companies`);
     if (response.ok) {
       return response.json();
     } else {
@@ -15,12 +17,9 @@ export async function getCompanies() {
 
 export async function deleteCompany(companyId: number) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/companies/${companyId}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const response = await fetch(`${apiUrl}/companies/${companyId}`, {
+      method: "DELETE",
+    });
 
     if (response.ok) {
       return response.json();
@@ -34,16 +33,13 @@ export async function deleteCompany(companyId: number) {
 
 export async function updateCompany(company: any) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/companies/${company.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(company),
-      }
-    );
+    const response = await fetch(`${apiUrl}/companies/${company.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(company),
+    });
 
     if (response.ok) {
       return response.json();
@@ -57,7 +53,7 @@ export async function updateCompany(company: any) {
 
 export async function createCompany(formData: any): Promise<string> {
   try {
-    const response = await fetch("http://localhost:3000/companies", {
+    const response = await fetch(`${apiUrl}/companies`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,12 +74,9 @@ export async function createCompany(formData: any): Promise<string> {
 export const checkExistingCnpj = async (cnpj: string) => {
   try {
     const cnpjClean = cleanCnpj(cnpj);
-    const response = await fetch(
-      `http://localhost:3000/companies/${cnpjClean}`
-    );
+    const response = await fetch(`${apiUrl}/companies/${cnpjClean}`);
 
     if (response.status === 404) {
-      // CNPJ não encontrado
       return false;
     }
 
