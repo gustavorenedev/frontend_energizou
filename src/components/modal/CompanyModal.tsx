@@ -21,6 +21,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, company }) => {
           <div>ID: {company.id}</div>
           <div>Cliente: {company.client_name}</div>
           <div>Razão: {company.company_name}</div>
+          <div>CNPJ: {company.company_cnpj}</div>
           <div>CEP: {company.company_zip_code}</div>
           <div>Endereço: {company.company_address}</div>
           <div>Número: {company.company_number}</div>
