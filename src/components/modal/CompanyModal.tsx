@@ -5,7 +5,7 @@ import "./CompanyModal.style.less";
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  company: ICompany; // Suponha que você tenha uma interface ICompany para representar os atributos da empresa.
+  company: ICompany;
 };
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, company }) => {
