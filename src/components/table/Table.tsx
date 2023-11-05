@@ -1,6 +1,8 @@
+// Table.tsx
 import React, { useState } from "react";
 import { Button } from "../button/Button";
 import Modal from "../modal/CompanyModal";
+import EditCompanyModal from "../../components/modalUpdate/modalUpdate"; // Importe o modal de edição
 import { ICompany } from "../companyPreview/companyPreview";
 import "./Table.style.less";
 
@@ -12,6 +14,14 @@ type Props = {
 const Table: React.FC<Props> = ({ list, onDeleteCompany }) => {
   const [selectedCompany, setSelectedCompany] = useState<ICompany | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
+  const handleUpdateCompany = () => {};
+
+  const handleEdit = (company: ICompany) => {
+    setSelectedCompany(company);
+    setIsUpdateModalOpen(true);
+  };
 
   const handleDeleteClick = (companyId: number) => {
     if (window.confirm("Tem certeza de que deseja excluir esta empresa?")) {
@@ -42,7 +52,7 @@ const Table: React.FC<Props> = ({ list, onDeleteCompany }) => {
                     <Button onClick={() => handleViewClick(company)}>
                       Ver
                     </Button>
-                    <Button onClick={() => console.log("Edit")}>Editar</Button>
+                    <Button onClick={() => handleEdit(company)}>Editar</Button>
                     <Button onClick={() => handleDeleteClick(company.id)}>
                       Deletar
                     </Button>
@@ -58,6 +68,14 @@ const Table: React.FC<Props> = ({ list, onDeleteCompany }) => {
         onClose={() => setIsModalOpen(false)}
         company={selectedCompany}
       />
+      {isUpdateModalOpen && (
+        <EditCompanyModal
+          isOpen={isUpdateModalOpen}
+          onClose={() => setIsUpdateModalOpen(false)}
+          company={selectedCompany as ICompany}
+          onUpdateCompany={handleUpdateCompany}
+        />
+      )}
     </div>
   );
 };
